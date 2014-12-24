@@ -65,13 +65,13 @@ module Paperclip
               metadata.parents = [{'id' => parent_id}]
             end
             media = Google::APIClient::UploadIO.new( file, mime_type)
-            # result = client.execute(
-            #   :api_method => drive.files.insert,
-            #   :body_object => metadata,
-            #   :media => media,
-            #   :parameters => {
-            #     'uploadType' => 'multipart',
-            #     'alt' => 'json' })
+            result = client.execute(
+              :api_method => drive.files.insert,
+              :body_object => metadata,
+              :media => media,
+              :parameters => {
+                'uploadType' => 'multipart',
+                'alt' => 'json' })
           end
         end
         after_flush_writes
