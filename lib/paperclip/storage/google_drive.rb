@@ -42,7 +42,9 @@ module Paperclip
       end
       #
       def flush_writes
+        puts "I am here"
         @queued_for_write.each do |style, file|
+           puts "I am inside"
           #upload(style, file) #style file
           client = google_api_client
           drive = client.discovered_api('drive', 'v2')
@@ -63,6 +65,7 @@ module Paperclip
           end
           media = Google::APIClient::UploadIO.new( file, mime_type)
           if exists?(path(style))
+            puts "I am inside if"
             result = client.execute(
               :api_method => drive.files.update,
               :body_object => metadata,
