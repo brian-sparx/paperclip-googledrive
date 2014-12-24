@@ -43,9 +43,9 @@ module Paperclip
       #
       def flush_writes
         @queued_for_write.each do |style, file|
-          if exists?(path(style))
-            raise FileExists, "file \"#{path(style)}\" already exists in your Google Drive"
-          else
+          # if exists?(path(style))
+          #   raise FileExists, "file \"#{path(style)}\" already exists in your Google Drive"
+          # else
             #upload(style, file) #style file
             client = google_api_client
             drive = client.discovered_api('drive', 'v2')
@@ -72,7 +72,7 @@ module Paperclip
               :parameters => {
                 'uploadType' => 'multipart',
                 'alt' => 'json' })
-          end
+          # end
         end
         after_flush_writes
         @queued_for_write = {}
