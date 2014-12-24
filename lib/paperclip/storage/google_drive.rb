@@ -43,8 +43,10 @@ module Paperclip
       #
       def flush_writes
         puts "I am here"
+        byebug
         @queued_for_write.each do |style, file|
            puts "I am inside"
+           byebug
           #upload(style, file) #style file
           client = google_api_client
           drive = client.discovered_api('drive', 'v2')
@@ -66,6 +68,7 @@ module Paperclip
           media = Google::APIClient::UploadIO.new( file, mime_type)
           if exists?(path(style))
             puts "I am inside if"
+            byebug
             result = client.execute(
               :api_method => drive.files.update,
               :body_object => metadata,
@@ -76,6 +79,7 @@ module Paperclip
                 'uploadType' => 'multipart',
                 'alt' => 'json' })
           else
+            byebug
             result = client.execute(
               :api_method => drive.files.insert,
               :body_object => metadata,
